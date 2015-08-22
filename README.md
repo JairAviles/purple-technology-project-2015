@@ -23,6 +23,13 @@ Create a simple REST API in Node.js with the below specific tasks.
 ### Considerations
  To be successful you don't have to finish them all. Invest reasonable time depending on your free time and don't worry if you can't finish it all. Focus on quality of your code not on quantity of tasks. Make it readable, expandable and production ready.
 
+Readmes of the available resources can be found here:
+
+* [Wiki Project](https://github.com/JairAviles/purple-technology-project-2015/wiki)
+* [NodeJS](https://nodejs.org/)
+* [CoffeScript](http://coffeescript.org/)
+* [Hapi](http://hapijs.com/)
+
 License
 ----
 
