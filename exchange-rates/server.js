@@ -16,7 +16,7 @@ function start(routes) {
 	//Start server
 	server.start(function(err) {
 		if(err) {
-			console.log('Internal server error: \n' + err);
+			console.log('Internal server error:' + err);
 		}
 		console.log('Server running at:', server.info.uri);
 	});
