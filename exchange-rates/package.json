@@ -1,0 +1,34 @@
+{
+  "name": "exchange-rates-api",
+  "version": "0.0.1",
+  "description": "purple technology challenge 2015",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "node server.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/JairAviles/purple-technology-project-2015.git"
+  },
+  "keywords": [
+    "AIESEC",
+    "Czech",
+    "Republic",
+    "Purple",
+    "Technology"
+  ],
+  "author": "Jair Israel Avilés Eusebio",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/JairAviles/purple-technology-project-2015/issues"
+  },
+  "homepage": "https://github.com/JairAviles/purple-technology-project-2015#readme",
+  "dependencies": {
+    "hapi": "^9.0.3",
+    "inert": "^3.0.1",
+    "joi": "^6.6.1",
+    "vision": "^3.0.0"
+  },
+  "devDependencies": {}
+}

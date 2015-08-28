@@ -27,7 +27,7 @@ Readmes of the available resources can be found here:
 
 * [Wiki Project](https://github.com/JairAviles/purple-technology-project-2015/wiki)
 * [NodeJS](https://nodejs.org/)
-* [CoffeScript](http://coffeescript.org/)
+* [CoffeScript](http://coffeescript.org/) [^1]
 * [Hapi](http://hapijs.com/)
 
 License
@@ -36,3 +36,5 @@ License
 MIT
 
 Please contact me by [mail](mailto:hi@jairaviles.mx) or [AIESEC mail](mailto:jair.aviles@aiesec.net) for either comments, doubts or any suggestions you might have.
+
+[^1]: Decided to not integrate in current production version due to the fact I did not have enough time to learn it
