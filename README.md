@@ -29,6 +29,8 @@ Readmes of the available resources can be found here:
 * [NodeJS](https://nodejs.org/)
 * [CoffeScript](http://coffeescript.org/) [^1]
 * [Hapi](http://hapijs.com/)
+* [open-exchange-rates](https://www.npmjs.com/package/open-exchange-rates)
+* [money](https://www.npmjs.com/package/money)
 
 License
 ----
@@ -37,4 +39,4 @@ MIT
 
 Please contact me by [mail](mailto:hi@jairaviles.mx) or [AIESEC mail](mailto:jair.aviles@aiesec.net) for either comments, doubts or any suggestions you might have.
 
-[^1]: Decided to not integrate in current production version due to the fact I did not have enough time to learn it
+[^1]: Decided to not integrate in current rc version due to the fact I did not have enough time to learn it

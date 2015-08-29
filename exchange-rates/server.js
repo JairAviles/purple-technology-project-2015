@@ -1,13 +1,16 @@
-var Hapi = require('Hapi'), //Hapi Object instance from module
-    port = parseInt(process.env.PORT, 10) || 3000, //Asign port by enviroment variable or 3000 as default
-	server = new Hapi.Server(); //global server instance
+//Dependencies
+var Hapi = require('Hapi'); //Hapi Object instance from module
 
+//Global Objects	
+var server = new Hapi.Server(); //Global Hapi server instance
+
+//Start server
 function start(routes) {
 
 	// Create a server with a host and port
 	server.connection({
-		host: 'localhost',
-		port: port
+		host: '0.0.0.0',
+		port: parseInt(process.env.PORT, 10) || 3000
 	});
 
 	//Add routes to current server
@@ -22,4 +25,5 @@ function start(routes) {
 	});
 }
 
+//Return start Server method
 module.exports.start = start;

@@ -28,6 +28,8 @@
     "hapi": "^9.0.3",
     "inert": "^3.0.1",
     "joi": "^6.6.1",
+    "money": "^0.2.0",
+    "open-exchange-rates": "^0.3.0",
     "vision": "^3.0.0"
   },
   "devDependencies": {}
