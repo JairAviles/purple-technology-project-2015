@@ -32,5 +32,9 @@
     "open-exchange-rates": "^0.3.0",
     "vision": "^3.0.0"
   },
-  "devDependencies": {}
+  "devDependencies": {},
+  "engines": {
+    "node":"0.12.x",
+    "npm":"2.11.x" 
+  }
 }
