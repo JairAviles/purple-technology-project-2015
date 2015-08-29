@@ -39,4 +39,4 @@ MIT
 
 Please contact me by [mail](mailto:hi@jairaviles.mx) or [AIESEC mail](mailto:jair.aviles@aiesec.net) for either comments, doubts or any suggestions you might have.
 
-[^1]: Decided to not integrate in current rc version due to the fact I did not have enough time to learn it
+[^1]: Decided to not integrate in current RC version due to the fact I did not have enough time to learn it
