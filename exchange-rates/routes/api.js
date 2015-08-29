@@ -84,21 +84,42 @@ function getExchangeRate(req, rep) {
 		try {
 			rep(findLatestRate(params)).type('application/json').code(200);
 		} catch(err) {
-			rep('Internal Error. Please, try again.').code(500);
+			console.log(err);
+			rep('Internal Error. Please, try again. ' + err.message).code(500);
 		}	
 }
 
 //This function will validate the received
 //params and invoke the third
 //party api call
-function findLatestRate(params) {
+function findLatestRate(params, rep) {
 	//Break point
      debugger;
-     // Result Variable
-     var jsonObj = {};     
+     var jsonObj = {},  // Result Variable
+         callback = function(params, jsonObj) { //callback
+					 //Prepare jsonObj according to params
+					     	if(params.toCurrency && params.toCurrency in config.currencies_list) {
+								//prepare result for base currency to specified currency
+								jsonObj.baseCurrency = {
+							    	'fromCurrency': config.baseCurrency,
+							    	'amount': params.amount
+							    }; 
+							    jsonObj.toCurrency = {
+							    	'toCurrency':  params.toCurrency,
+							    	'amountRate': fx(params.amount).from(config.baseCurrency).to(params.toCurrency)
+							    };
+							} else {
+								jsonObj.statusCode = 400;
+								jsonObj.error = 'Bad request';
+								jsonObj.message = 'Only the following exchange currencies are available: ' +
+												  Object.keys(config.currencies_list);
+							}
+							console.log('jsonObj cb: ' + JSON.stringify(jsonObj));
+							return JSON.stringify(jsonObj);
+					};
 
      // Get latest exchange rates from API and pass to callback function
-    oxr.latest(function(err) { //node callback structure
+      oxr.latest(function(err) { //node callback structure
      	if(err) {
      		//Print stack trace according to enviroment
      		console.log(
@@ -113,22 +134,7 @@ function findLatestRate(params) {
     	fx.rates = oxr.rates; //Rates Currency from APU call
     	fx.base = oxr.base; //Base Currency from API call
      });
-    //Prepare jsonObj according to params
-     	if(params.toCurrency && params.toCurrency in config.currencies_list) {
-			//prepare result for base currency to specified currency
-			jsonObj.baseCurrency = {
-		    	'fromCurrency': config.baseCurrency,
-		    	'amount': params.amount
-		    }; 
-		    jsonObj.toCurrency = {
-		    	'toCurrency':  params.toCurrency,
-		    	'amountRate': fx(params.amount).from(config.baseCurrency).to(params.toCurrency)
-		    };
-		} else {
-			jsonObj.statusCode = 400;
-			jsonObj.error = 'Bad request';
-			jsonObj.message = 'Only the following exchange currencies are available: ' +
-							  Object.keys(config.currencies_list);
-		}
-	return JSON.stringify(jsonObj);
+
+      return callback(params, jsonObj);
 }
+
