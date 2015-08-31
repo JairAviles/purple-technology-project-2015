@@ -1,7 +1,8 @@
 //Dependencies
 var Joi = require('joi'), //Joi property for validation requirements
 	fx  = require('money'), //Library for easy currency conversion
-	oxr = require('open-exchange-rates'); //API wrapper
+	oxr = require('open-exchange-rates'), //API wrapper
+	Q = require('q'); //Promises for api call
 
 //Config Object
 var config = require('../config/config'); // Config module
@@ -84,6 +85,12 @@ function getExchangeRate(req, rep) {
 		try {
 			rep(findLatestRate(params)).type('application/json').code(200);
 		} catch(err) {
+			//Print stack trace according to enviroment
+	     		console.log(
+	     			 config.node_env === 'development' ? 
+	     			 err.toString() : 
+	     			 'Internal Error.'
+	     			);
 			rep('Internal Error. Please, try again.').code(500);
 		}	
 }
@@ -93,27 +100,31 @@ function getExchangeRate(req, rep) {
 //party api call
 function findLatestRate(params) {
 	//Break point
-     debugger;
+     // debugger;
      // Result Variable
-     var jsonObj = {};     
+     var jsonObj = {},
+     //Resolve function for Promise
+     resolve = function() {
+	     // Get latest exchange rates from API and pass to callback function
+	    oxr.latest(function(err) { //node callback structure
+	     	if(err) {
+	     		//Print stack trace according to enviroment
+	     		console.log(
+	     			 config.node_env === 'development' ? 
+	     			 err.toString() : 
+	     			 'Internal Error.'
+	     			);
 
-     // Get latest exchange rates from API and pass to callback function
-    oxr.latest(function(err) { //node callback structure
-     	if(err) {
-     		//Print stack trace according to enviroment
-     		console.log(
-     			 config.node_env === 'development' ? 
-     			 err.toString() : 
-     			 'Error occurred when trying to consume ox API'
-     			);
-
-     		return false;
-     	}
-     	// Apply exchange rates and base rate to 'fx' library object:
-    	fx.rates = oxr.rates; //Rates Currency from APU call
-    	fx.base = oxr.base; //Base Currency from API call
-     });
-    //Prepare jsonObj according to params
+	     		return false;
+	     	}
+	     	// Apply exchange rates and base rate to 'fx' library object:
+	    	//fx.rates = oxr.rates; //Rates Currency from APU call
+	    	//fx.base = oxr.base; //Base Currency from API call
+	     });
+	 },
+	 //Then function for preparing result Object
+	 thenResult = function() {
+    	//Prepare jsonObj according to params
      	if(params.toCurrency && params.toCurrency in config.currencies_list) {
 			//prepare result for base currency to specified currency
 			jsonObj.baseCurrency = {
@@ -122,7 +133,8 @@ function findLatestRate(params) {
 		    }; 
 		    jsonObj.toCurrency = {
 		    	'toCurrency':  params.toCurrency,
-		    	'amountRate': fx(params.amount).from(config.baseCurrency).to(params.toCurrency)
+		    	//'amountRate': fx(params.amount).from(config.baseCurrency).to(params.toCurrency)
+		    	'amountRate': oxr.rates[params.toCurrency] * params.amount || 'Error while calculating amount Rate. Please try again'
 		    };
 		} else {
 			jsonObj.statusCode = 400;
@@ -130,5 +142,33 @@ function findLatestRate(params) {
 			jsonObj.message = 'Only the following exchange currencies are available: ' +
 							  Object.keys(config.currencies_list);
 		}
-	return JSON.stringify(jsonObj);
+		console.log(JSON.stringify(jsonObj));
+	 },
+	 //Then function for setting fix values
+	 thenFix = function() {
+    	fx.rates = oxr.rates; //Rates Currency from APU call
+	    fx.base = oxr.base; //Base Currency from API call
+	},
+	 //Reject function for promise
+	 reject = function(err) {
+	 	//Print stack trace according to enviroment
+	     		console.log(
+	     			 config.node_env === 'development' ? 
+	     			 err.toString() : 
+	     			 'Internal Error.'
+	     			);
+	 	return false;
+	 };
+
+	//Promise Q
+    Q.nfcall(resolve)
+    .then(thenFix())
+    .then(thenResult())
+    .fail(function(err) {
+    	reject(err);
+    })
+    .done();
+
+    console.log('final jsonObj: ' +  JSON.stringify(jsonObj));
+    	return JSON.stringify(jsonObj);
 }

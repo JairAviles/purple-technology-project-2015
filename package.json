@@ -30,11 +30,12 @@
     "joi": "^6.6.1",
     "money": "^0.2.0",
     "open-exchange-rates": "^0.3.0",
+    "q": "^1.4.1",
     "vision": "^3.0.0"
   },
   "devDependencies": {},
   "engines": {
-    "node":"0.12.x",
-    "npm":"2.11.x" 
+    "node": "0.12.x",
+    "npm": "2.11.x"
   }
 }
