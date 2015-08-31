@@ -31,6 +31,7 @@ Readmes of the available resources can be found here:
 * [Hapi](http://hapijs.com/)
 * [open-exchange-rates](https://www.npmjs.com/package/open-exchange-rates)
 * [money](https://www.npmjs.com/package/money)
+* [Q](https://www.npmjs.com/package/q)
 
 License
 ----
