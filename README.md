@@ -4,6 +4,11 @@
 In the word of Confucious
 > The will to win, the desire to succeed, the urge to reach your full potential... these are the keys that will unlock the door to personal excellence.
 
+---
+## Update September 2015
+I was not selected for this internship, though I was recognized for such high quality code. Despite the above statement, this project is available for personal portfolio and free to check it out and modify under the corresponding license.
+---
+
 ### Overview
 Create a simple REST API in Node.js with the below specific tasks.
 
