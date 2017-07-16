@@ -13,7 +13,9 @@ config.currencies_list = {
 	EUR: "Euro", //Available currency
 	GBP: "British Pound Sterling", //Available currency
 	CZK: "Czech Republic Koruna", //Available currency
-	JPY: "Japanese Yen" //Available currency
+	JPY: "Japanese Yen", //Available currency
+	BRL: "Brazilian Real", //Available currency
+	MXN: "Mexican Peso" //Available currency
 };
 
 //Return config Object

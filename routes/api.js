@@ -24,7 +24,7 @@ module.exports = [
 	     	url: 'https://github.com/JairAviles/purple-technology-project-2015',
 	     	wiki: 'https://github.com/JairAviles/purple-technology-project-2015/wiki',
 	     	author: 'Jair Israel Aviles Eusebio',
-	     	version: config.version 
+	     	version: config.version
 	     }).type('application/json');
 	  }
 	},
@@ -35,7 +35,7 @@ module.exports = [
 	  handler: function (req, rep) {
 	    rep.redirect('/exchange-rates/' + config.baseCurrency);
 	  }
-	},	
+	},
 	// Go to default route
 	{
 	  method: 'GET',
@@ -43,7 +43,7 @@ module.exports = [
 	  handler: function (req, rep) {
 	    rep.redirect('/exchange-rates/' + config.baseCurrency);
 	  }
-	},	
+	},
 	// Base route for API with optional parameters
     {
 	    method: 'GET',
@@ -78,7 +78,7 @@ module.exports = [
 //Validate the params from request and reply according to them
 function getExchangeRate(req, rep) {
 	    var params = {}; //Object that handles the params data from request
-	   
+
 	    /* Expecting /exchange-rates/USD&toCurrency=value&amount=value */
 	    params.toCurrency   = req.query.toCurrency ? encodeURIComponent(req.query.toCurrency).toUpperCase() : undefined; //Get toCurrency from uri parameters
 	    params.amount = req.query.amount; //Get amount from uri parameters
@@ -87,12 +87,12 @@ function getExchangeRate(req, rep) {
 		} catch(err) {
 			//Print stack trace according to enviroment
 	     		console.log(
-	     			 config.node_env === 'development' ? 
-	     			 err.toString() : 
+	     			 config.node_env === 'development' ?
+	     			 err.toString() :
 	     			 'Internal Error.'
 	     			);
 			rep('Internal Error. Please, try again.').code(500);
-		}	
+		}
 }
 
 //This function will validate the received
@@ -110,8 +110,8 @@ function findLatestRate(params) {
 	     	if(err) {
 	     		//Print stack trace according to enviroment
 	     		console.log(
-	     			 config.node_env === 'development' ? 
-	     			 err.toString() : 
+	     			 config.node_env === 'development' ?
+	     			 err.toString() :
 	     			 'Internal Error.'
 	     			);
 
@@ -130,7 +130,7 @@ function findLatestRate(params) {
 			jsonObj.baseCurrency = {
 		    	'fromCurrency': config.baseCurrency,
 		    	'amount': params.amount
-		    }; 
+		    };
 		    jsonObj.toCurrency = {
 		    	'toCurrency':  params.toCurrency,
 		    	//'amountRate': fx(params.amount).from(config.baseCurrency).to(params.toCurrency)
@@ -153,8 +153,8 @@ function findLatestRate(params) {
 	 reject = function(err) {
 	 	//Print stack trace according to enviroment
 	     		console.log(
-	     			 config.node_env === 'development' ? 
-	     			 err.toString() : 
+	     			 config.node_env === 'development' ?
+	     			 err.toString() :
 	     			 'Internal Error.'
 	     			);
 	 	return false;

@@ -1,7 +1,7 @@
 //Dependencies
 var Hapi = require('hapi'); //Hapi Object instance from module
 
-//Global Objects	
+//Global Objects
 var server = new Hapi.Server(); //Global Hapi server instance
 
 //Start server
