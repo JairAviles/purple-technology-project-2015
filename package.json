@@ -25,12 +25,12 @@
   },
   "homepage": "https://github.com/JairAviles/purple-technology-project-2015#readme",
   "dependencies": {
-    "hapi": "^9.0.3",
-    "inert": "^3.0.1",
-    "joi": "^6.6.1",
+    "hapi": "^9.5.1",
+    "inert": "^3.2.1",
+    "joi": "^6.10.1",
     "money": "^0.2.0",
     "open-exchange-rates": "^0.3.0",
-    "q": "^1.4.1",
+    "q": "^1.5.1",
     "vision": "^3.0.0"
   },
   "devDependencies": {},
